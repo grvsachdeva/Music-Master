@@ -29,6 +29,9 @@ body{
 .profile-info{
   margin-left: 20px;
   text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .profile-name{
   font-size: 26px;
@@ -36,4 +39,37 @@ body{
 
 .profile-followers,.profilr-genres{
   font-size:18px;
+}
+
+/*Gallery*/
+
+.track{
+  display: inline-block;
+  width:220px;
+  height: 220px;
+  margin:10px;
+  text-align: left;
+  cursor: pointer;
+  position: relative;
+}
+
+.track-img{
+  width: 220px;
+  height:220px;
+  border: 3px solid #fff;
+  border-radius:3px;
+  object-fit:cover;
+  position:absolute;
+}
+
+.track-text{
+  background-color: black;
+  color:white;
+  opacity: 0.75;
+  width: 214px;
+  margin-left: 3px;
+  bottom: 0;
+  position:absolute;
+  text-align: center;
+  padding:10px;
 }
