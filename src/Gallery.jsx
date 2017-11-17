@@ -53,7 +53,7 @@ class Gallery extends Component{
               <div
                 key={k}
                 className="track"
-                onclick={() => this.playAudio(track.preview_url)}
+                onClick={() => this.playAudio(track.preview_url)}
               >
                 <img
                   src={trackImg}
@@ -66,7 +66,7 @@ class Gallery extends Component{
                     this.state.playingUrl === track.preview_url
                     ? <span>| |</span>
                     :<span>&#9654;</span>
-                  };
+                  }
                 </div>
               </div>
                 <p className="track-text">{track.name}</p>
