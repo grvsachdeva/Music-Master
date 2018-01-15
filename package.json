@@ -4,11 +4,13 @@
   "private": true,
   "dependencies": {
     "bootstrap": "^3.3.7",
+    "machinepack-spotify": "0.0.3",
     "node-spotify-api": "^1.0.7",
     "react": "^16.0.0",
     "react-bootstrap": "^0.31.5",
     "react-dom": "^16.0.0",
-    "react-scripts": "1.0.17"
+    "react-scripts": "1.0.17",
+    "spotify-web-api-node": "^2.5.0"
   },
   "scripts": {
     "start": "react-scripts start",

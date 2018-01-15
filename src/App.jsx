@@ -3,6 +3,7 @@ import {FormGroup,FormControl,InputGroup,Glyphicon} from 'react-bootstrap';
 import './App.css';
 import Profile from './Profile';
 import Gallery from './Gallery';
+import Spotify from './Spotify';
 
 class App extends Component{
 
@@ -16,57 +17,42 @@ class App extends Component{
   }
 
   search(){
-    console.log('this.state',this.state);
-    const accessToken="BQBret1iQlLivufW4GwgDP1YTkT-To_76NfUGsvclj0uHLaMa8VAZ_TzAre7c9L7eP8lHyu9oKZ_4pJZk3G2sg";
-    const BASE_URL = 'https://api.spotify.com/v1/search?';
-    let FETCH_URL = `${BASE_URL}q=${this.state.query}&type=artist&limit=1`;
-    const ALBUM_URL = "https://api.spotify.com/v1/artists/";
+    const accessToken = Spotify.getAccessToken();
+   const BASE_URL = 'https://api.spotify.com/v1/search?';
+   const FETCH_URL = `${BASE_URL}q=${this.state.query}&type=artist&limit=1`;
+   const ALBUM_URL = 'https://api.spotify.com/v1/artists';
 
-    console.log("FETCH_URL",FETCH_URL);
+   // get artist info
+   fetch(FETCH_URL, {
+       method: "GET",
+       headers: {
+         Authorization: `Bearer ${accessToken}`
+       }
+     })
+     .then(response => response.json())
+     .then(jsonResponse => {
+       const artist = jsonResponse.artists.items[0];
+       console.log('artist', artist);
+       this.setState({artist}); //if key and value are the same, can use one word to depict both
 
-    fetch(FETCH_URL,{
-      method:'GET',
-      headers: {
-          Authorization: `Bearer ${accessToken}`
-        }
-    })
-    .then(response => response.json())
-    .then(json => {
-      console.log(json);
-      const artist = json.artists.items[0];
-      console.log("artist",artist);
-      this.setState({artist});
+   const FETCH_URL_TOPTRACKS = `${ALBUM_URL}/${artist.id}/top-tracks?country=US&`;
+     //get artist's top tracks
+     fetch(FETCH_URL_TOPTRACKS, {
+       method: 'GET',
+       headers: {
+         Authorization: `Bearer ${accessToken}`
+       }
+     })
+     .then(response => response.json())
+     .then(jsonResponse => {
+       // console.log('artist top tracks:', jsonResponse );
+       const tracks = jsonResponse.tracks;
+       //set state of the tracks to be the output of tracks
+       this.setState({tracks});
+     })
+     });
+ }
 
-      FETCH_URL = `${ALBUM_URL}${artist.id}/top-tracks?country=US&`
-      fetch(FETCH_URL,{
-        method:'GET',
-        headers: {
-          Authorization: `Bearer ${accessToken}`
-        }
-      })
-      .then(response => response.json())
-      .then(json => {
-        console.log('artist \'s top tracks',json);
-        const {tracks} = json;
-        this.setState({tracks});
-      })
-
-    })
-//     var Spotify = require('node-spotify-api');
-//
-// var spotify = new Spotify({
-//   id: "780b33061f7f4ba4be52af191a20a381",
-//   secret: "434bfb96f1c841baa894185ccddafec8"
-// });
-//
-// spotify.search({ type: 'track', query: 'All the Small Things' }, function(err, data) {
-//   if (err) {
-//     return console.log('Error occurred: ' + err);
-//   }
-//
-// console.log(data);
-// });
-  }
 
   render(){
     return(
