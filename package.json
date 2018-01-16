@@ -10,8 +10,7 @@
     "react-bootstrap": "^0.31.5",
     "react-dom": "^16.0.0",
     "react-scripts": "1.0.17",
-    "spotify-web-api-node": "^2.5.0",
-     "node": "6.11.4"
+    "spotify-web-api-node": "^2.5.0"
   },
   "scripts": {
     "start": "react-scripts start",
